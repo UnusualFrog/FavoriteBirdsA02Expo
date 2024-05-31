@@ -14,7 +14,7 @@ export default function App() {
 
   const [birdData, setBirdData] = useState(Bluejay);
 
-  const [buttonPressed, setButtonPressed] = useState("A");
+  const [buttonPressed, setButtonPressed] = useState("1");
 
   const [birdIndex, setBirdIndex] = useReducer((state, action) => {
     switch (action){
@@ -37,17 +37,17 @@ export default function App() {
       <Bird birdData={birdData}/>
 
       <View id="button_container" style={styles.button_container}>
-        <RadioButton buttonText="A" buttonPushed={buttonPressed} onPress={() =>{
+        <RadioButton buttonText="1" buttonPushed={buttonPressed} onPress={() =>{
             setBirdIndex(1);
-            setButtonPressed("A");
+            setButtonPressed("1");
         }}></RadioButton>
-        <RadioButton buttonText="B" buttonPushed={buttonPressed} onPress={() =>{
+        <RadioButton buttonText="2" buttonPushed={buttonPressed} onPress={() =>{
             setBirdIndex(2);
-            setButtonPressed("B");
+            setButtonPressed("2");
         }}></RadioButton>
-        <RadioButton buttonText="C" buttonPushed={buttonPressed} onPress={() =>{
+        <RadioButton buttonText="3" buttonPushed={buttonPressed} onPress={() =>{
             setBirdIndex(3);
-            setButtonPressed("C");
+            setButtonPressed("3");
         }}></RadioButton>
       </View>
 

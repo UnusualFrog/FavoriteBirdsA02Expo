@@ -1,5 +1,7 @@
 {
   "name": "Blue jay",
   "color": "Blue with black stripes and white belly",
+  "category": "Crows, Magpies, Jays Perching Birds",
+  "behavior": "Direct Flight, Flap/Glide, Hovering, Undulating",
   "imageUri": "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/311635911/900"
 }
