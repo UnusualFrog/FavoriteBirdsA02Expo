@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import {useState, useReducer} from 'react';
 
 import Bird from './components/bird.js'
+import RadioButton from './components/radioButton.js'
 
 import Bluejay from './birdData/Bluejay.json';
 import Flicker from './birdData/Flicker.json';
@@ -12,6 +13,8 @@ import Nuthatch from './birdData/Nuthatch.json';
 export default function App() {
 
   const [birdData, setBirdData] = useState(Bluejay);
+
+  const [buttonPressed, setButtonPressed] = useState("A");
 
   const [birdIndex, setBirdIndex] = useReducer((state, action) => {
     switch (action){
@@ -24,6 +27,8 @@ export default function App() {
         case 3:
             setBirdData(Nuthatch);
             break;
+        default:
+            setBirdData(Nuthatch);
     }
   },1);
 
@@ -31,15 +36,21 @@ export default function App() {
     <View style={styles.container}>
       <Bird birdData={birdData}/>
 
-      <Pressable onPress={() => setBirdIndex(1)}>
-        <Text>1</Text>
-      </Pressable>
-      <Pressable onPress={() => setBirdIndex(2)}>
-          <Text>2</Text>
-      </Pressable>
-      <Pressable onPress={() => setBirdIndex(3)}>
-          <Text>3</Text>
-      </Pressable>
+      <View id="button_container" style={styles.button_container}>
+        <RadioButton buttonText="A" buttonPushed={buttonPressed} onPress={() =>{
+            setBirdIndex(1);
+            setButtonPressed("A");
+        }}></RadioButton>
+        <RadioButton buttonText="B" buttonPushed={buttonPressed} onPress={() =>{
+            setBirdIndex(2);
+            setButtonPressed("B");
+        }}></RadioButton>
+        <RadioButton buttonText="C" buttonPushed={buttonPressed} onPress={() =>{
+            setBirdIndex(3);
+            setButtonPressed("C");
+        }}></RadioButton>
+      </View>
+
 
       <StatusBar style="auto" />
     </View>
@@ -53,4 +64,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button_container: {
+    flexDirection: "row",
+  },
+  button: {
+    borderRadius: 10,
+    backgroundColor: 'blue',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+  }
 });
