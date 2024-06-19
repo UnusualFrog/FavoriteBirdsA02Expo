@@ -4,7 +4,7 @@ import {useState} from 'react';
 
 export default function Bird({birdData}) {
     return (
-    <>
+    <View>
         <Text style={styles.h1}>Top 3 Birds {"\n"}</Text>
 
         <Text style={styles.h2}>{birdData.name}</Text>
@@ -18,7 +18,7 @@ export default function Bird({birdData}) {
         <Text style={styles.dataRow}><Text style={styles.bold}>Color:</Text> {birdData.color}</Text>
         <Text style={styles.dataRow}><Text style={styles.bold}>Category:</Text> {birdData.category}</Text>
         <Text style={styles.dataRow}><Text style={styles.bold}>Behavior:</Text> {birdData.behavior}</Text>
-    </>
+    </View>
     );
 }
 

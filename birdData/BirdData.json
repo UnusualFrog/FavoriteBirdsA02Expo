@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Blue jay",
+    "color": "Blue with black stripes and white belly",
+    "category": "Crows, Magpies, Jays Perching Birds",
+    "behavior": "Direct Flight, Flap/Glide, Hovering, Undulating",
+    "imageUri": "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/311635911/900"
+  },
+  {
+    "name": "Northern Flicker",
+    "color": "Brown with Black Speckles",
+    "category": "Picidae, Woodpeckers, Tree-clinging Birds",
+    "behavior": "Flap/Glide, Undulating",
+    "imageUri": "https://www.allaboutbirds.org/guide/assets/og/615440015-1200px.jpg"
+  },
+  {
+    "name": "Redbreasted Nuthatch",
+    "color": "Grayish Blue with Red Belly",
+    "category": "Nuthatches, Tree-clinging Birds",
+    "behavior": "Flitter, Undulating",
+    "imageUri": "https://www.allaboutbirds.org/guide/assets/photo/308563981-480px.jpg"
+  }
+]
