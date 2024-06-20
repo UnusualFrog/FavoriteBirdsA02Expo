@@ -10,15 +10,17 @@ import { BirdContext } from '../components/BirdContext.js';
 import BirdData from '../birdData/BirdData.json';
 
 export default function Page() {
-    const {bird, setBird} = useContext(BirdContext)
+    const {birds, setBirds} = useContext(BirdContext);
+    const currentBird = birds.birdData[birds.currentIndex];
 
-    const [birdName, setBirdName] = useState(bird.name);
-    const [birdColor, setBirdColor] = useState(bird.color);
-    const [birdCategory, setBirdCategory] = useState(bird.category);
-    const [birdBehavior, setBirdBehavior] = useState(bird.behavior);
-    const [birdImageUri, setBirdImageUri] = useState(bird.imageUri);
+    const [birdName, setBirdName] = useState(currentBird.name);
+    const [birdColor, setBirdColor] = useState(currentBird.color);
+    const [birdCategory, setBirdCategory] = useState(currentBird.category);
+    const [birdBehavior, setBirdBehavior] = useState(currentBird.behavior);
+    const [birdImageUri, setBirdImageUri] = useState(currentBird.imageUri);
 
-    const updateBirdInfo = () => {
+    // Create new bird object and overwrite the object at the current index
+    const updateBirdInfo = (index) => {
           const latestData = {
               "name": birdName,
               "color": birdColor,
@@ -26,16 +28,23 @@ export default function Page() {
               "behavior": birdBehavior,
               "imageUri": birdImageUri
           }
-          setBird(latestData);
+          setBirds({"currentIndex": index, "newBird": latestData});
     }
 
+    // Register link clicked
     const handlePress = () => {
        Linking.openURL('https://www.allaboutbirds.org/guide');
     }
 
   return (
     <View style={styles.container}>
-        <Text style={styles.h1}>Current Bird: <Text style={styles.currentBird}>{bird.name}</Text></Text>
+        <View style={styles.centerContainer}>
+            <Text style={styles.h1}>
+                Current Bird: {""}
+                <Text style={styles.currentBirdName}>{currentBird.name}</Text>
+            </Text>
+        </View>
+
         <Text>For ideas on new birds, check out the following link: {"\n"}
             <Pressable style={styles.link} onPress={handlePress}> https://www.allaboutbirds.org/guide </Pressable>
         </Text>
@@ -85,7 +94,7 @@ export default function Page() {
             />
         </View>
 
-        <Button label={"Update Info"} onPress={updateBirdInfo}/>
+        <Button label={"Update Info"} onPress={() => {updateBirdInfo(birds.currentIndex)}}/>
     </View>
   );
 }
@@ -95,6 +104,11 @@ const styles = StyleSheet.create( {
         alignItems: 'center',
         padding: 20,
       },
+    centerContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 20,
+    },
     input: {
         height: 40,
         width: 400,
@@ -119,7 +133,7 @@ const styles = StyleSheet.create( {
         marginVertical: 10,
         color: '#000',
     },
-    currentBird: {
+    currentBirdName: {
         fontSize: 32,
         fontWeight: 'normal',
         marginVertical: 10,
