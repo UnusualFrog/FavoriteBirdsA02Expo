@@ -46,7 +46,7 @@ export default function Page() {
         </View>
 
         <Text>For ideas on new birds, check out the following link: {"\n"}
-            <Pressable style={styles.link} onPress={handlePress}> https://www.allaboutbirds.org/guide </Pressable>
+            <Pressable style={styles.link} onPress={handlePress}><Text> https://www.allaboutbirds.org/guide </Text></Pressable>
         </Text>
 
         <View style={styles.inputRow}>
