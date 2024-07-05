@@ -1,6 +1,7 @@
 //Pre-defined
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
 import Bird from '../components/bird.js'
@@ -17,7 +18,18 @@ export default function Page() {
   const {birds, setBirds} = useContext(BirdContext);
 
   const [birdsIndex, setBirdsIndex] = useState(0);
-    console.log(birds);
+
+  const db = useSQLiteContext();
+
+  useEffect(() => {
+            async function setup() {
+              const result = await db.getFirstAsync('SELECT * FROM movies');
+              console.log(result);
+//              setMovie(result);
+            }
+            setup();
+      }, []);
+
   return (
   <View style={styles.container}>
     <Bird birdData={birds.birdData[birds.currentIndex]}/>
