@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 
 
 export default function HomeLayout() {
-  const [birds, setBirds] = useReducer(reducer, {"currentIndex": 0, "birdData": [...BirdData], });
+  const [birds, setBirds] = useReducer(reducer, {"birdData": [...BirdData], "currentIndex": 0});
 
   return (
        <View>

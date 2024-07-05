@@ -23,12 +23,13 @@ export default function Page() {
 
   useEffect(() => {
             async function setup() {
-              const result = await db.getFirstAsync('SELECT * FROM movies');
+              console.log(birds.currentIndex);
+              const result = await db.getAllAsync('SELECT * FROM movies');
               console.log(result);
 //              setMovie(result);
             }
             setup();
-      }, []);
+      }, [birds]);
 
   return (
   <View style={styles.container}>
