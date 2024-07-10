@@ -19,21 +19,23 @@ export default function Page() {
 
   const [birdsIndex, setBirdsIndex] = useState(0);
 
+  const [currentBird, setCurrentBIrd] = useState({})
+
   const db = useSQLiteContext();
 
   useEffect(() => {
             async function setup() {
               console.log(birds.currentIndex);
               const result = await db.getAllAsync('SELECT * FROM movies');
-              console.log(result);
-//              setMovie(result);
+              console.log("DB Result: ", result[birds.currentIndex]);
+              setCurrentBIrd(result[birds.currentIndex]);
             }
             setup();
       }, [birds]);
-
+  console.log("JSON: ", birds.birdData[birds.currentIndex]);
   return (
   <View style={styles.container}>
-    <Bird birdData={birds.birdData[birds.currentIndex]}/>
+    <Bird birdData={currentBird}/>
     <View style={styles.button_container}>
         <Button label={birds.birdData[0].name} onPress={() => {setBirds({"currentIndex": 0, "newBird": {}})}}/>
         <Button label={birds.birdData[1].name} onPress={() => {setBirds({"currentIndex": 1, "newBird": {}})}}/>

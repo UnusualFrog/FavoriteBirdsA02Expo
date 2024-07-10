@@ -11,7 +11,7 @@ export default function Bird({birdData}) {
         <Image
                 style={styles.image}
                 source={{
-                  uri: birdData.imageUri
+                  uri: birdData.imageURI
                 }}
               />
 
