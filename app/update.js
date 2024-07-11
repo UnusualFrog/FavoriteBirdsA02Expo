@@ -20,7 +20,7 @@ export default function Page() {
 // Get row associated with bird at current index
   useEffect(() => {
         async function setup() {
-            const sqlQuery = `SELECT * FROM movies WHERE id=${birdIndex+1}`
+            const sqlQuery = `SELECT * FROM birds WHERE id=${birdIndex+1}`
             console.log(sqlQuery);
             const result = await db.getFirstAsync(sqlQuery);
             console.log("DB Result: ", result);
@@ -28,6 +28,16 @@ export default function Page() {
         }
         setup();
   }, []);
+
+  const updateRow = () => {
+    async function update() {
+                    const sqlQuery = `UPDATE birds SET name="james" WHERE id=${birdIndex+1}`
+                    console.log(sqlQuery);
+                    const result = await db.runAsync(sqlQuery);
+                    console.log("DB Result: ", result);
+                }
+                update();
+  };
 
     console.log("Update page: ", DBResult);
 
@@ -90,7 +100,7 @@ export default function Page() {
             />
         </View>
 
-        <Button label={"Update Info"} onPress={() => {console.log("TODO: Update Me!")}}/>
+        <Button label={"Update Info"} onPress={() => {updateRow()}}/>
 
 
     </View>
