@@ -15,31 +15,38 @@ import Flicker from '../birdData/Flicker.json'
 import Nuthatch from '../birdData/Nuthatch.json'
 
 export default function Page() {
-  const {birds, setBirds} = useContext(BirdContext);
-
-  const [birdsIndex, setBirdsIndex] = useState(0);
-
-  const [currentBird, setCurrentBIrd] = useState({})
-
   const db = useSQLiteContext();
 
+  const {birdIndex, setBirdIndex} = useContext(BirdContext);
+
+  const [DBResult, setDBResult] = useState(db[birdIndex])
+
+// Get row associated with bird at current index
   useEffect(() => {
             async function setup() {
-              console.log(birds.currentIndex);
-              const result = await db.getAllAsync('SELECT * FROM movies');
-              console.log("DB Result: ", result[birds.currentIndex]);
-              setCurrentBIrd(result[birds.currentIndex]);
+                const sqlQuery = `SELECT * FROM movies WHERE id=${birdIndex+1}`
+                console.log(sqlQuery);
+                const result = await db.getFirstAsync(sqlQuery);
+                console.log("DB Result: ", result);
+                setDBResult(result);
             }
             setup();
-      }, [birds]);
-  console.log("JSON: ", birds.birdData[birds.currentIndex]);
+      }, [birdIndex]);
+
+
+if (DBResult == null) {
+    return (
+    <Text>Loading</Text>
+    )
+}
+
   return (
   <View style={styles.container}>
-    <Bird birdData={currentBird}/>
+    <Bird birdData={DBResult}/>
     <View style={styles.button_container}>
-        <Button label={birds.birdData[0].name} onPress={() => {setBirds({"currentIndex": 0, "newBird": {}})}}/>
-        <Button label={birds.birdData[1].name} onPress={() => {setBirds({"currentIndex": 1, "newBird": {}})}}/>
-        <Button label={birds.birdData[2].name} onPress={() => {setBirds({"currentIndex": 2, "newBird": {}})}}/>
+        <Button label={1} onPress={() => {setBirdIndex(0)}}/>
+        <Button label={2} onPress={() => {setBirdIndex(1)}}/>
+        <Button label={3} onPress={() => {setBirdIndex(2)}}/>
     </View>
   </View>
   );

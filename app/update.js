@@ -1,6 +1,7 @@
 // Pre-defined
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Text, TextInput, Pressable, Linking } from 'react-native';
+import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
 import Button from '../components/button.js';
@@ -10,30 +11,30 @@ import { BirdContext } from '../components/BirdContext.js';
 import BirdData from '../birdData/BirdData.json';
 
 export default function Page() {
-    const {birds, setBirds} = useContext(BirdContext);
-    const currentBird = birds.birdData[birds.currentIndex];
+  const db = useSQLiteContext();
 
-    const [birdName, setBirdName] = useState(currentBird.name);
-    const [birdColor, setBirdColor] = useState(currentBird.color);
-    const [birdCategory, setBirdCategory] = useState(currentBird.category);
-    const [birdBehavior, setBirdBehavior] = useState(currentBird.behavior);
-    const [birdImageUri, setBirdImageUri] = useState(currentBird.imageUri);
+  const {birdIndex, setBirdIndex} = useContext(BirdContext);
 
-    // Create new bird object and overwrite the object at the current index
-    const updateBirdInfo = (index) => {
-          const latestData = {
-              "name": birdName,
-              "color": birdColor,
-              "category": birdCategory,
-              "behavior": birdBehavior,
-              "imageUri": birdImageUri
-          }
-          setBirds({"currentIndex": index, "newBird": latestData});
-    }
+  const [DBResult, setDBResult] = useState(db[birdIndex])
 
-    // Register link clicked
-    const handlePress = () => {
-       Linking.openURL('https://www.allaboutbirds.org/guide');
+// Get row associated with bird at current index
+  useEffect(() => {
+        async function setup() {
+            const sqlQuery = `SELECT * FROM movies WHERE id=${birdIndex+1}`
+            console.log(sqlQuery);
+            const result = await db.getFirstAsync(sqlQuery);
+            console.log("DB Result: ", result);
+            setDBResult(result);
+        }
+        setup();
+  }, []);
+
+    console.log("Update page: ", DBResult);
+
+    if (DBResult == null) {
+        return (
+        <Text>Loading</Text>
+        )
     }
 
   return (
@@ -41,20 +42,19 @@ export default function Page() {
         <View style={styles.centerContainer}>
             <Text style={styles.h1}>
                 Current Bird: {""}
-                <Text style={styles.currentBirdName}>{currentBird.name}</Text>
+                <Text style={styles.currentBirdName}>{DBResult["name"]}</Text>
             </Text>
         </View>
 
         <Text>For ideas on new birds, check out the following link: {"\n"}
-            <Pressable style={styles.link} onPress={handlePress}><Text> https://www.allaboutbirds.org/guide </Text></Pressable>
+            <Pressable onPress={handlePress}><Text style={styles.link}>https://www.allaboutbirds.org/guide</Text></Pressable>
         </Text>
 
-        <View style={styles.inputRow}>
+         <View style={styles.inputRow}>
             <Text style={styles.h2}>Name: </Text>
             <TextInput
                 style={styles.input}
-                onChangeText={setBirdName}
-                value={birdName}
+                value={DBResult["name"]}
             />
         </View>
 
@@ -62,8 +62,7 @@ export default function Page() {
             <Text style={styles.h2}>Color: </Text>
             <TextInput
               style={styles.input}
-              onChangeText={setBirdColor}
-              value={birdColor}
+              value={DBResult["color"]}
             />
         </View>
 
@@ -71,8 +70,7 @@ export default function Page() {
             <Text style={styles.h2}>Category: </Text>
             <TextInput
               style={styles.input}
-              onChangeText={setBirdCategory}
-              value={birdCategory}
+              value={DBResult["category"]}
             />
         </View>
 
@@ -80,8 +78,7 @@ export default function Page() {
             <Text style={styles.h2}>Behavior: </Text>
             <TextInput
               style={styles.input}
-              onChangeText={setBirdBehavior}
-              value={birdBehavior}
+              value={DBResult["behavior"]}
             />
         </View>
 
@@ -89,14 +86,20 @@ export default function Page() {
             <Text style={styles.h2}>Image URI: </Text>
             <TextInput
               style={styles.input}
-              onChangeText={setBirdImageUri}
-              value={birdImageUri}
+              value={DBResult["imageURI"]}
             />
         </View>
 
-        <Button label={"Update Info"} onPress={() => {updateBirdInfo(birds.currentIndex)}}/>
+        <Button label={"Update Info"} onPress={() => {console.log("TODO: Update Me!")}}/>
+
+
     </View>
   );
+}
+
+// Register link clicked
+const handlePress = () => {
+   Linking.openURL('https://www.allaboutbirds.org/guide');
 }
 
 const styles = StyleSheet.create( {

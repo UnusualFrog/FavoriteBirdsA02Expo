@@ -13,7 +13,7 @@ import BirdData from '../birdData/BirdData.json'
 import Bluejay from '../birdData/Bluejay.json';
 
 // Update index of selected bird, and overwrite bird at index if new bird data is not blank
-const reducer = (state, action) => {
+/*const reducer = (state, action) => {
         let newState = { ...state, currentIndex: action.currentIndex };
 
         if (Object.keys(action.newBird).length !== 0) {
@@ -21,18 +21,19 @@ const reducer = (state, action) => {
         }
 
         return newState;
-    }
+    }*/
 
 
 export default function HomeLayout() {
-  const [birds, setBirds] = useReducer(reducer, {"birdData": [...BirdData], "currentIndex": 0});
+  /*const [birds, setBirds] = useReducer(reducer, {"birdData": [...BirdData], "currentIndex": 0});*/
+  const [birdIndex, setBirdIndex] = useState(0);
 
   return (
        <View>
             <SQLiteProvider databaseName="movies3.db" onInit={initializeDB}>
                 <Text>{"\n"}</Text>
                 <Navbar />
-                <BirdContext.Provider value={{birds, setBirds}}>
+                <BirdContext.Provider value={{birdIndex, setBirdIndex}}>
                     <Slot />
                 </BirdContext.Provider>
             </SQLiteProvider>
