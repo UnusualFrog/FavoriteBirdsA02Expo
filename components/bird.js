@@ -5,8 +5,6 @@ import {useState} from 'react';
 export default function Bird({birdData}) {
     return (
     <View>
-        <Text style={styles.h1}>Top 3 Birds {"\n"}</Text>
-
         <Text style={styles.h2}>{birdData.name}</Text>
         <Image
                 style={styles.image}

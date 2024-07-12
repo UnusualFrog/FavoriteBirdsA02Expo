@@ -73,10 +73,6 @@ export default function Page() {
             </Text>
         </View>
 
-        <Text>For ideas on new birds, check out the following link: {"\n"}
-            <Pressable onPress={handlePress}><Text style={styles.link}>https://www.allaboutbirds.org/guide</Text></Pressable>
-        </Text>
-
          <View style={styles.inputRow}>
             <Text style={styles.h2}>Name: </Text>
             <TextInput
@@ -123,6 +119,10 @@ export default function Page() {
         </View>
 
         <Button label={"Update Info"} onPress={() => {updateRow()}}/>
+
+        <Text style={styles.linkArea}>For ideas on new birds, check out the following link: {"\n"}
+            <Pressable onPress={handlePress}><Text style={styles.link}>https://www.allaboutbirds.org/guide</Text></Pressable>
+        </Text>
     </View>
   );
 }
@@ -140,19 +140,18 @@ const styles = StyleSheet.create( {
     centerContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 20,
     },
     input: {
         height: 40,
         width: 230,
-        margin: 12,
+        marginTop: 4,
+        marginBottom: 2,
         borderWidth: 1,
         padding: 10,
     },
     inputRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
     },
     h1: {
         fontSize: 32,
@@ -176,4 +175,7 @@ const styles = StyleSheet.create( {
         color: 'blue',
         textDecorationLine: 'underline',
       },
+    linkArea: {
+        marginTop: 50,
+    }
 });
