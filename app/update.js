@@ -15,31 +15,48 @@ export default function Page() {
 
   const {birdIndex, setBirdIndex} = useContext(BirdContext);
 
-  const [DBResult, setDBResult] = useState(db[birdIndex])
+  const [DBResult, setDBResult] = useState(db[birdIndex]);
+
+  const [newDBResult, setNewDBResult] = useState(db[birdIndex]);
+
+  const [birdName, setBirdName] = useState("");
+  const [birdColor, setBirdColor] = useState("");
+  const [birdCategory, setBirdCategory] = useState("");
+  const [birdBehavior, setBirdBehavior] = useState("");
+  const [birdImageUri, setBirdImageUri] = useState("");
 
 // Get row associated with bird at current index
   useEffect(() => {
         async function setup() {
             const sqlQuery = `SELECT * FROM birds WHERE id=${birdIndex+1}`
-            console.log(sqlQuery);
             const result = await db.getFirstAsync(sqlQuery);
-            console.log("DB Result: ", result);
             setDBResult(result);
+
+            setBirdName(result.name);
+            setBirdColor(result.color);
+            setBirdCategory(result.category);
+            setBirdBehavior(result.behavior);
+            setBirdImageUri(result.imageURI);
         }
         setup();
-  }, []);
+  }, [newDBResult]);
 
   const updateRow = () => {
     async function update() {
-                    const sqlQuery = `UPDATE birds SET name="james" WHERE id=${birdIndex+1}`
-                    console.log(sqlQuery);
-                    const result = await db.runAsync(sqlQuery);
-                    console.log("DB Result: ", result);
-                }
-                update();
+            const sqlQuery = `
+                UPDATE birds
+                SET name="${birdName}",
+                color="${birdColor}",
+                category="${birdCategory}",
+                behavior="${birdBehavior}",
+                imageURI="${birdImageUri}"
+                WHERE id=${birdIndex+1}
+                `
+            const result = await db.runAsync(sqlQuery);
+            setNewDBResult(result);
+        }
+        update();
   };
-
-    console.log("Update page: ", DBResult);
 
     if (DBResult == null) {
         return (
@@ -64,7 +81,8 @@ export default function Page() {
             <Text style={styles.h2}>Name: </Text>
             <TextInput
                 style={styles.input}
-                value={DBResult["name"]}
+                onChangeText={setBirdName}
+                value={birdName}
             />
         </View>
 
@@ -72,7 +90,8 @@ export default function Page() {
             <Text style={styles.h2}>Color: </Text>
             <TextInput
               style={styles.input}
-              value={DBResult["color"]}
+              onChangeText={setBirdColor}
+              value={birdColor}
             />
         </View>
 
@@ -80,7 +99,8 @@ export default function Page() {
             <Text style={styles.h2}>Category: </Text>
             <TextInput
               style={styles.input}
-              value={DBResult["category"]}
+              onChangeText={setBirdCategory}
+              value={birdCategory}
             />
         </View>
 
@@ -88,7 +108,8 @@ export default function Page() {
             <Text style={styles.h2}>Behavior: </Text>
             <TextInput
               style={styles.input}
-              value={DBResult["behavior"]}
+              onChangeText={setBirdBehavior}
+              value={birdBehavior}
             />
         </View>
 
@@ -96,13 +117,12 @@ export default function Page() {
             <Text style={styles.h2}>Image URI: </Text>
             <TextInput
               style={styles.input}
-              value={DBResult["imageURI"]}
+               onChangeText={setBirdImageUri}
+               value={birdImageUri}
             />
         </View>
 
         <Button label={"Update Info"} onPress={() => {updateRow()}}/>
-
-
     </View>
   );
 }

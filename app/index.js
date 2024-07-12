@@ -25,9 +25,7 @@ export default function Page() {
   useEffect(() => {
             async function setup() {
                 const sqlQuery = `SELECT * FROM birds WHERE id=${birdIndex+1}`
-                console.log(sqlQuery);
                 const result = await db.getFirstAsync(sqlQuery);
-                console.log("DB Result: ", result);
                 setDBResult(result);
             }
             setup();
