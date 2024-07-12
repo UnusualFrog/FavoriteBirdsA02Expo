@@ -12,20 +12,7 @@ import { BirdContext } from '../components/BirdContext.js'
 import BirdData from '../birdData/BirdData.json'
 import Bluejay from '../birdData/Bluejay.json';
 
-// Update index of selected bird, and overwrite bird at index if new bird data is not blank
-/*const reducer = (state, action) => {
-        let newState = { ...state, currentIndex: action.currentIndex };
-
-        if (Object.keys(action.newBird).length !== 0) {
-            newState.birdData[newState.currentIndex] = action.newBird;
-        }
-
-        return newState;
-    }*/
-
-
 export default function HomeLayout() {
-  /*const [birds, setBirds] = useReducer(reducer, {"birdData": [...BirdData], "currentIndex": 0});*/
   const [birdIndex, setBirdIndex] = useState(0);
 
   return (
@@ -53,5 +40,4 @@ async function initializeDB(db) {
         await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', "Redbreasted Nuthatch", "Grayish Blue with Red Belly", "Nuthatches, Tree-clinging Birds", "Flitter, Undulating", "https://www.allaboutbirds.org/guide/assets/photo/308563981-480px.jpg");
     }
     const firstRow = await db.getFirstAsync('SELECT * FROM birds WHERE id=2');
-//    console.log(firstRow.id,firstRow.name, firstRow.color, firstRow.category, firstRow.behavior);
 }
