@@ -31,6 +31,7 @@ export default function HomeLayout() {
 async function initializeDB(db) {
     await db.execAsync(`
         PRAGMA journal_mode = 'wal';
+        DROP TABLE IF EXISTS THIS_IS_NOT_birds;
         CREATE TABLE IF NOT EXISTS birds (id INTEGER PRIMARY KEY, name TEXT NOT NULL, color TEXT NOT NULL, category TEXT NOT NULL, behavior TEXT NOT NULL, imageURI TEXT NOT NULL);
     `);
      const result = await db.getAllAsync('SELECT * FROM birds');

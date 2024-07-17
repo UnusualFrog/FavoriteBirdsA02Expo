@@ -68,10 +68,12 @@ if (DBResult == null) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        padding: 20,
       },
     button_container: {
         flexDirection: "row",
+        justifyContent: "space-around", // or "space-between"
+        alignItems: "center",
+        paddingHorizontal: 20, // adjust as needed
       },
   h1: {
       fontSize: 50,
