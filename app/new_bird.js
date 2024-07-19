@@ -1,17 +1,27 @@
 // Pre-defined
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useState} from 'react';
+import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
 import Button from '../components/button.js';
 
 
 export default function NavBar() {
+    const db = useSQLiteContext();
+
     const [birdName, setBirdName] = useState("");
     const [birdColor, setBirdColor] = useState("");
     const [birdCategory, setBirdCategory] = useState("");
     const [birdBehavior, setBirdBehavior] = useState("");
     const [birdImageUri, setBirdImageUri] = useState("");
+
+    const addRow = () => {
+        async function add() {
+                const result = await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', birdName, birdColor, birdCategory, birdBehavior, birdImageUri);
+            }
+            add();
+      };
 
     return (
         <View style={styles.container}>
@@ -57,7 +67,7 @@ export default function NavBar() {
                 />
             </View>
 
-            <Button label={"Add Bird"}/>
+            <Button label={"Add Bird"} onPress={() => {addRow()}}/>
         </View>
     );
 }
