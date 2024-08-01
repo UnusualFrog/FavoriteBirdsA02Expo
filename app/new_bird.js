@@ -4,8 +4,10 @@ import { useState} from 'react';
 import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
-import Button from '../components/button.js';
+import notButton from '../components/button.js';
 
+// Component Library
+import {Button, Card} from '@rneui/themed';
 
 export default function NavBar() {
     const db = useSQLiteContext();
@@ -25,49 +27,52 @@ export default function NavBar() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.h1}>Add A New Bird</Text>
+            <Card>
+                <Card.Title style={styles.h1}>Add A New Bird</Card.Title>
+                <Card.Divider />
+                <View style={styles.inputRow}>
+                    <Text style={styles.h2}>Name: </Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={setBirdName}
+                    />
+                </View>
 
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Name: </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setBirdName}
-                />
-            </View>
+                <View style={styles.inputRow}>
+                    <Text style={styles.h2}>Color: </Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={setBirdColor}
+                    />
+                </View>
 
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Color: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={setBirdColor}
-                />
-            </View>
+                <View style={styles.inputRow}>
+                    <Text style={styles.h2}>Category: </Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={setBirdCategory}
+                    />
+                </View>
 
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Category: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={setBirdCategory}
-                />
-            </View>
+                <View style={styles.inputRow}>
+                    <Text style={styles.h2}>Behavior: </Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={setBirdBehavior}
+                    />
+                </View>
 
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Behavior: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={setBirdBehavior}
-                />
-            </View>
+                <View style={styles.inputRow}>
+                    <Text style={styles.h2}>Image URI: </Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={setBirdImageUri}
+                    />
+                </View>
+            </Card>
 
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Image URI: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={setBirdImageUri}
-                />
-            </View>
+            <Button title={"Add Bird"} onPress={() => {addRow()}}  buttonStyle={styles.button} titleStyle={styles.button_title}/>
 
-            <Button label={"Add Bird"} onPress={() => {addRow()}}/>
         </View>
     );
 }
@@ -109,7 +114,7 @@ const styles = StyleSheet.create( {
         fontSize: 32,
         fontWeight: 'normal',
         marginVertical: 10,
-        color: 'blue',
+        color: 'rgba(111, 202, 186, 1)',
     },
     link: {
         color: 'blue',
@@ -117,5 +122,21 @@ const styles = StyleSheet.create( {
       },
     linkArea: {
         marginTop: 50,
-    }
+    },
+    button: {
+        backgroundColor: 'rgba(111, 202, 186, 1)',
+        borderRadius: 5,
+        width: 100,
+        marginHorizontal: 20,
+        marginVertical: 10,
+      },
+      button_container: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+      },
+      button_title: {
+        fontWeight: 'bold',
+        fontSize: 23,
+      },
 });

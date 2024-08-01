@@ -17,8 +17,7 @@ export default function HomeLayout() {
 
   return (
        <View>
-            <SQLiteProvider databaseName="movies3.db" onInit={initializeDB}>
-                <Text>{"\n"}</Text>
+            <SQLiteProvider databaseName="birds.db" onInit={initializeDB}>
                 <Navbar />
                 <BirdContext.Provider value={{birdIndex, setBirdIndex}}>
                     <Slot />

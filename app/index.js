@@ -5,7 +5,7 @@ import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
 import Bird from '../components/bird.js'
-import Button from '../components/button.js'
+import notButton from '../components/button.js'
 import { BirdContext } from '../components/BirdContext.js';
 
 // Assets
@@ -13,6 +13,9 @@ import birdData from '../birdData/BirdData.json'
 import Bluejay from '../birdData/Bluejay.json'
 import Flicker from '../birdData/Flicker.json'
 import Nuthatch from '../birdData/Nuthatch.json'
+
+// Component Library
+import {Button} from '@rneui/themed';
 
 export default function Page() {
   const db = useSQLiteContext();
@@ -54,12 +57,12 @@ if (DBResult == null) {
 
   return (
   <View style={styles.container}>
-    <Text style={styles.h1}>Top {totalBirds} Birds {"\n"}</Text>
+    <Text style={styles.h1}>Top {totalBirds} Birds</Text>
     <Bird birdData={DBResult}/>
     <View style={styles.button_container}>
-        <Button label={"<="} onPress={() => {handleButton(-1)}}/>
-        <Button label={birdIndex}/>
-        <Button label={"=>"} onPress={() => {handleButton(1)}}/>
+        <Button title={"<="} onPress={() => {handleButton(-1)}} buttonStyle={styles.button} titleStyle={styles.button_title}/>
+        <Button title={`${birdIndex+1}`} buttonStyle={styles.button} titleStyle={styles.button_title}/>
+        <Button title={"=>"} onPress={() => {handleButton(1)}} buttonStyle={styles.button} titleStyle={styles.button_title}/>
     </View>
   </View>
   );
@@ -69,18 +72,26 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
       },
-    button_container: {
-        flexDirection: "row",
-        justifyContent: "space-around", // or "space-between"
-        alignItems: "center",
-        paddingHorizontal: 20, // adjust as needed
-      },
   h1: {
       fontSize: 50,
-      marginTop: 0.67,
-      marginBottom: 0.67,
-      marginLeft: 0,
-      marginRight: 0,
       fontWeight: 'bold',
+      paddingVertical: 0,
+      marginVertical: 0,
     },
+  button: {
+    backgroundColor: 'rgba(111, 202, 186, 1)',
+    borderRadius: 5,
+    width: 100,
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
+  button_container: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  button_title: {
+    fontWeight: 'bold',
+    fontSize: 23,
+  },
 });

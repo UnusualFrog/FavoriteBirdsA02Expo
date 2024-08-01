@@ -4,11 +4,14 @@ import { View, StyleSheet, Text, TextInput, Pressable, Linking } from 'react-nat
 import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
-import Button from '../components/button.js';
+import notButton from '../components/button.js';
 import { BirdContext } from '../components/BirdContext.js';
 
 // Assets
 import BirdData from '../birdData/BirdData.json';
+
+// Component Library
+import {Button, Card} from '@rneui/themed';
 
 export default function Page() {
   const db = useSQLiteContext();
@@ -66,59 +69,63 @@ export default function Page() {
 
   return (
     <View style={styles.container}>
-        <View style={styles.centerContainer}>
-            <Text style={styles.h1}>
-                Current Bird: {""}
-                <Text style={styles.currentBirdName}>{DBResult["name"]}</Text>
-            </Text>
-        </View>
+        <Card>
+            <Card.Title>
+                    <Text style={styles.h1}>
+                        Current Bird: {""}
+                        <Text style={styles.currentBirdName}>{DBResult["name"]}</Text>
+                    </Text>
+            </Card.Title>
 
-         <View style={styles.inputRow}>
-            <Text style={styles.h2}>Name: </Text>
-            <TextInput
-                style={styles.input}
-                onChangeText={setBirdName}
-                value={birdName}
-            />
-        </View>
+            <Card.Divider />
 
-        <View style={styles.inputRow}>
-            <Text style={styles.h2}>Color: </Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setBirdColor}
-              value={birdColor}
-            />
-        </View>
+             <View style={styles.inputRow}>
+                <Text style={styles.h2}>Name: </Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setBirdName}
+                    value={birdName}
+                />
+            </View>
 
-        <View style={styles.inputRow}>
-            <Text style={styles.h2}>Category: </Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setBirdCategory}
-              value={birdCategory}
-            />
-        </View>
+            <View style={styles.inputRow}>
+                <Text style={styles.h2}>Color: </Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={setBirdColor}
+                  value={birdColor}
+                />
+            </View>
 
-        <View style={styles.inputRow}>
-            <Text style={styles.h2}>Behavior: </Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setBirdBehavior}
-              value={birdBehavior}
-            />
-        </View>
+            <View style={styles.inputRow}>
+                <Text style={styles.h2}>Category: </Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={setBirdCategory}
+                  value={birdCategory}
+                />
+            </View>
 
-        <View style={styles.inputRow}>
-            <Text style={styles.h2}>Image URI: </Text>
-            <TextInput
-              style={styles.input}
-               onChangeText={setBirdImageUri}
-               value={birdImageUri}
-            />
-        </View>
+            <View style={styles.inputRow}>
+                <Text style={styles.h2}>Behavior: </Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={setBirdBehavior}
+                  value={birdBehavior}
+                />
+            </View>
 
-        <Button label={"Update Info"} onPress={() => {updateRow()}}/>
+            <View style={styles.inputRow}>
+                <Text style={styles.h2}>Image URI: </Text>
+                <TextInput
+                  style={styles.input}
+                   onChangeText={setBirdImageUri}
+                   value={birdImageUri}
+                />
+            </View>
+        </Card>
+
+        <Button title={"Update Info"} onPress={() => {updateRow()}} buttonStyle={styles.button} titleStyle={styles.button_title}/>
 
         <Text style={styles.linkArea}>For ideas on new birds, check out the following link: {"\n"}
             <Pressable onPress={handlePress}><Text style={styles.link}>https://www.allaboutbirds.org/guide</Text></Pressable>
@@ -169,7 +176,7 @@ const styles = StyleSheet.create( {
         fontSize: 32,
         fontWeight: 'normal',
         marginVertical: 10,
-        color: 'blue',
+        color: 'rgba(111, 202, 186, 1)',
     },
     link: {
         color: 'blue',
@@ -177,5 +184,21 @@ const styles = StyleSheet.create( {
       },
     linkArea: {
         marginTop: 50,
-    }
+    },
+    button: {
+        backgroundColor: 'rgba(111, 202, 186, 1)',
+        borderRadius: 5,
+        width: 100,
+        marginHorizontal: 20,
+        marginVertical: 10,
+      },
+      button_container: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+      },
+      button_title: {
+        fontWeight: 'bold',
+        fontSize: 23,
+      },
 });

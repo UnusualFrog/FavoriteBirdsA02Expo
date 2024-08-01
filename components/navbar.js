@@ -1,6 +1,12 @@
+// Pre-defined
 import { View, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
-import Button from './button';
+
+// Custom Component
+import notButton from './button';
+
+// Component Library
+import {Button} from '@rneui/themed';
 
 export default function NavBar() {
     const handleHome = () => {
@@ -14,9 +20,9 @@ export default function NavBar() {
     }
     return (
         <View style={styles.container}>
-            <Button label={"Top 3 Birds"} onPress = {handleHome} />
-            <Button label={"Update Bird"} onPress = {handleUpdate} />
-            <Button label={"New Bird"} onPress = {handleNew} />
+            <Button title={"Bird View"} onPress = {handleHome} buttonStyle={styles.button} titleStyle={styles.button_title}/>
+            <Button title={"Update Bird"} onPress = {handleUpdate} buttonStyle={styles.button} titleStyle={styles.button_title}/>
+            <Button title={"New Bird"} onPress = {handleNew} buttonStyle={styles.button} titleStyle={styles.button_title}/>
         </View>
     );
 }
@@ -27,5 +33,21 @@ const styles = StyleSheet.create({
         justifyContent: "space-around", // or "space-between"
         alignItems: "center",
         paddingHorizontal: 10, // adjust as needed
+        marginTop: 20,
     },
+    button: {
+        backgroundColor: 'rgba(111, 202, 186, 1)',
+        borderRadius: 5,
+        width: 100,
+        marginHorizontal: 20,
+      },
+  button_container: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  button_title: {
+    fontWeight: 'bold',
+    fontSize: 23,
+  },
 });
