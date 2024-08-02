@@ -15,7 +15,7 @@ import Flicker from '../birdData/Flicker.json'
 import Nuthatch from '../birdData/Nuthatch.json'
 
 // Component Library
-import {Button} from '@rneui/themed';
+import {Button, Icon} from '@rneui/themed';
 
 export default function Page() {
   const db = useSQLiteContext();
@@ -51,7 +51,14 @@ export default function Page() {
 
 if (DBResult == null) {
     return (
-    <Text>Loading</Text>
+   <View style={styles.iconContainer}>
+       <Icon
+        name='loader'
+        type='feather'
+        raised
+         size={100}
+       />
+   </View>
     )
 }
 
@@ -72,6 +79,10 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
       },
+  iconContainer: {
+           marginTop: 200,
+           alignItems: 'center',
+         },
   h1: {
       fontSize: 50,
       fontWeight: 'bold',

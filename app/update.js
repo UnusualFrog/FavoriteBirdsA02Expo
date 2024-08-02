@@ -11,7 +11,7 @@ import { BirdContext } from '../components/BirdContext.js';
 import BirdData from '../birdData/BirdData.json';
 
 // Component Library
-import {Button, Card} from '@rneui/themed';
+import {Button, Card, Input, Icon} from '@rneui/themed';
 
 export default function Page() {
   const db = useSQLiteContext();
@@ -63,80 +63,40 @@ export default function Page() {
 
     if (DBResult == null) {
         return (
-        <Text>Loading</Text>
+        <View style={styles.iconContainer}>
+            <Icon
+             name='loader'
+             type='feather'
+             raised
+              size={100}
+            />
+        </View>
         )
     }
 
   return (
-    <View style={styles.container}>
+    <View >
         <Card>
             <Card.Title>
-                    <Text style={styles.h1}>
-                        Current Bird: {""}
-                        <Text style={styles.currentBirdName}>{DBResult["name"]}</Text>
-                    </Text>
+                <Text style={styles.h1}>Current Bird: {""}
+                    <Text style={styles.currentBirdName}>{DBResult["name"]}</Text>
+                </Text>
             </Card.Title>
-
             <Card.Divider />
 
-             <View style={styles.inputRow}>
-                <Text style={styles.h2}>Name: </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setBirdName}
-                    value={birdName}
-                />
-            </View>
-
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Color: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={setBirdColor}
-                  value={birdColor}
-                />
-            </View>
-
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Category: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={setBirdCategory}
-                  value={birdCategory}
-                />
-            </View>
-
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Behavior: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={setBirdBehavior}
-                  value={birdBehavior}
-                />
-            </View>
-
-            <View style={styles.inputRow}>
-                <Text style={styles.h2}>Image URI: </Text>
-                <TextInput
-                  style={styles.input}
-                   onChangeText={setBirdImageUri}
-                   value={birdImageUri}
-                />
-            </View>
+            <Input label="Name:" onChangeText={setBirdName} value={birdName} leftIcon={{ type: 'material-community', name: 'bird' }}/>
+            <Input label="Color:" onChangeText={setBirdColor} value={birdColor} leftIcon={{ type: 'foundation', name: 'paint-bucket' }}/>
+            <Input label="Category:" onChangeText={setBirdCategory} value={birdCategory} leftIcon={{ type: 'material', name: 'category' }}/>
+            <Input label="Behavior:" onChangeText={setBirdBehavior} value={birdBehavior} leftIcon={{ type: 'material-community', name: 'run' }}/>
+            <Input label="Image URI:" onChangeText={setBirdImageUri} value={birdImageUri} leftIcon={{ type: 'antdesign', name: 'picture' }}/>
         </Card>
 
-        <Button title={"Update Info"} onPress={() => {updateRow()}} buttonStyle={styles.button} titleStyle={styles.button_title}/>
+        <View style={styles.container}>
+            <Button title={"Update Info"} onPress={() => {updateRow()}} buttonStyle={styles.button} titleStyle={styles.button_title}/>
+        </View>
 
-        <Text style={styles.linkArea}>For ideas on new birds, check out the following link: {"\n"}
-            <Pressable onPress={handlePress}><Text style={styles.link}>https://www.allaboutbirds.org/guide</Text></Pressable>
-        </Text>
     </View>
   );
-}
-
-// Register link clicked
-const handlePress = () => {
-   Linking.openURL('https://www.allaboutbirds.org/guide');
 }
 
 const styles = StyleSheet.create( {
@@ -144,53 +104,25 @@ const styles = StyleSheet.create( {
         alignItems: 'center',
         padding: 20,
       },
-    centerContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    input: {
-        height: 40,
-        width: 230,
-        marginTop: 4,
-        marginBottom: 2,
-        borderWidth: 1,
-        padding: 10,
-    },
-    inputRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
+    iconContainer: {
+         marginTop: 200,
+         alignItems: 'center',
+       },
     h1: {
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: 'bold',
-        marginVertical: 15,
-        color: '#000',
-    },
-    h2: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginVertical: 10,
-        color: '#000',
     },
     currentBirdName: {
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: 'normal',
-        marginVertical: 10,
         color: 'rgba(111, 202, 186, 1)',
-    },
-    link: {
-        color: 'blue',
-        textDecorationLine: 'underline',
-      },
-    linkArea: {
-        marginTop: 50,
     },
     button: {
         backgroundColor: 'rgba(111, 202, 186, 1)',
         borderRadius: 5,
-        width: 100,
+        width: 300,
         marginHorizontal: 20,
-        marginVertical: 10,
+        marginTop: 5,
       },
       button_container: {
         flexDirection: "row",
