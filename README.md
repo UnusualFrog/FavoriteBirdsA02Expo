@@ -68,5 +68,18 @@ Launch the App with Expo Go
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+### Main Page
+![Main Page](https://github.com/UnusualFrog/FavoriteBirdsAppReact/blob/main/assets/screenshots/Mainpage.png)
+
+### Main Page Second Entry
+![Main Page 2](https://github.com/UnusualFrog/FavoriteBirdsAppReact/blob/main/assets/screenshots/Mainpage2.png)
+
+### Update Page
+![Update Page](https://github.com/UnusualFrog/FavoriteBirdsAppReact/blob/main/assets/screenshots/Updatepage.png)
+
+### Add Bird Page
+![Add Bird](https://github.com/UnusualFrog/FavoriteBirdsAppReact/blob/main/assets/screenshots/Addpage.png)
+
+### Main Page
+![Add Bird Filled](https://github.com/UnusualFrog/FavoriteBirdsAppReact/blob/main/assets/screenshots/Addpage2.png)
 
