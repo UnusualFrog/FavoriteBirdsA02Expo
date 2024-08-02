@@ -4,11 +4,7 @@ import { View, StyleSheet, Text, TextInput, Pressable, Linking } from 'react-nat
 import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
-import notButton from '../components/button.js';
 import { BirdContext } from '../components/BirdContext.js';
-
-// Assets
-import BirdData from '../birdData/BirdData.json';
 
 // Component Library
 import { Button, Card, Input, Icon } from '@rneui/themed';
@@ -16,12 +12,16 @@ import { Button, Card, Input, Icon } from '@rneui/themed';
 export default function Page() {
   const db = useSQLiteContext();
 
+  // Track currently selected bird
   const { birdIndex, setBirdIndex } = useContext(BirdContext);
 
+  // Hold result of database call to bird at current bird index
   const [DBResult, setDBResult] = useState(db[birdIndex]);
 
+  // Hold result of database call to updated bird at current index
   const [newDBResult, setNewDBResult] = useState(db[birdIndex]);
 
+  // Track text input content for use in updating the database
   const [birdName, setBirdName] = useState("");
   const [birdColor, setBirdColor] = useState("");
   const [birdCategory, setBirdCategory] = useState("");
@@ -44,6 +44,7 @@ export default function Page() {
     setup();
   }, [newDBResult]);
 
+  // Update data of currently selected bird
   const updateRow = () => {
     async function update() {
       const sqlQuery = `
@@ -61,6 +62,7 @@ export default function Page() {
     update();
   };
 
+  // Loading icon display while waiting for DB result
   if (DBResult == null) {
     return (
       <View style={styles.iconContainer}>
@@ -82,7 +84,7 @@ export default function Page() {
             <Text style={styles.currentBirdName}>{DBResult["name"]}</Text>
           </Text>
         </Card.Title>
-        <Card.Divider />
+        <Card.Divider/>
 
         <Input label="Name:" onChangeText={setBirdName} value={birdName} leftIcon={{ type: 'material-community', name: 'bird' }} />
         <Input label="Color:" onChangeText={setBirdColor} value={birdColor} leftIcon={{ type: 'foundation', name: 'paint-bucket' }} />

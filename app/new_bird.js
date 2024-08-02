@@ -3,21 +3,20 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import { useSQLiteContext } from 'expo-sqlite';
 
-// Components
-import notButton from '../components/button.js';
-
 // Component Library
 import { Button, Card, Input } from '@rneui/themed';
 
 export default function NavBar() {
     const db = useSQLiteContext();
 
+    // Track user input details for database insert
     const [birdName, setBirdName] = useState("");
     const [birdColor, setBirdColor] = useState("");
     const [birdCategory, setBirdCategory] = useState("");
     const [birdBehavior, setBirdBehavior] = useState("");
     const [birdImageUri, setBirdImageUri] = useState("");
 
+    // Insert new bird row into database using user input data
     const addRow = () => {
         async function add() {
             const result = await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', birdName, birdColor, birdCategory, birdBehavior, birdImageUri);

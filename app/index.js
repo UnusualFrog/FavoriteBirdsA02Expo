@@ -3,16 +3,9 @@ import { useState, useContext, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
 
-// Components
+// Custom Components
 import Bird from '../components/bird.js'
-import notButton from '../components/button.js'
 import { BirdContext } from '../components/BirdContext.js';
-
-// Assets
-import birdData from '../birdData/BirdData.json'
-import Bluejay from '../birdData/Bluejay.json'
-import Flicker from '../birdData/Flicker.json'
-import Nuthatch from '../birdData/Nuthatch.json'
 
 // Component Library
 import { Button, Icon } from '@rneui/themed';
@@ -20,10 +13,13 @@ import { Button, Icon } from '@rneui/themed';
 export default function Page() {
   const db = useSQLiteContext();
 
+  // Track selected bird
   const { birdIndex, setBirdIndex } = useContext(BirdContext);
 
+  // Hold result of database call to bird at current bird index
   const [DBResult, setDBResult] = useState(db[birdIndex])
 
+  // Track count of total birds in DB
   const [totalBirds, setTotalBirds] = useState(0);
 
   // Get row associated with bird at current index
@@ -43,12 +39,14 @@ export default function Page() {
 
   }, [birdIndex]);
 
+  // Button navigation between birds
   const handleButton = (direction) => {
     let newIndex = birdIndex + direction;
     if (newIndex >= 0 && newIndex < totalBirds)
       setBirdIndex(newIndex);
   }
 
+  // Loading icon display while waiting for DB result
   if (DBResult == null) {
     return (
       <View style={styles.iconContainer}>

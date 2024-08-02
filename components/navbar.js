@@ -2,9 +2,6 @@
 import { View, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 
-// Custom Component
-import notButton from './button';
-
 // Component Library
 import { Button } from '@rneui/themed';
 
@@ -30,9 +27,9 @@ export default function NavBar() {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        justifyContent: "space-around", // or "space-between"
+        justifyContent: "space-around",
         alignItems: "center",
-        paddingHorizontal: 5, // adjust as needed
+        paddingHorizontal: 5,
         marginTop: 20,
     },
     button: {

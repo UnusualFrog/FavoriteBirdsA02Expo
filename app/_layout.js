@@ -4,15 +4,12 @@ import { useState, useEffect, useReducer } from 'react';
 import { Slot } from 'expo-router';
 import { SQLiteProvider, useSQLiteContext, type SQLiteDatabase } from 'expo-sqlite';
 
-// Components
+//Custom Components
 import Navbar from '../components/navbar';
 import { BirdContext } from '../components/BirdContext.js'
 
-// Assets
-import BirdData from '../birdData/BirdData.json'
-import Bluejay from '../birdData/Bluejay.json';
-
 export default function HomeLayout() {
+    // Track currently selected bird
     const [birdIndex, setBirdIndex] = useState(0);
 
     return (
@@ -27,6 +24,7 @@ export default function HomeLayout() {
     );
 }
 
+// Create birds database if it does not exist, and populate it with 3 birds to start
 async function initializeDB(db) {
     await db.execAsync(`
         PRAGMA journal_mode = 'wal';
@@ -39,5 +37,4 @@ async function initializeDB(db) {
         await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', "Northern Flicker", "Brown with Speckles", "Picidae, Woodpeckers, Tree-clinging Birds", "Flap/Glide, Undulating", "https://www.allaboutbirds.org/guide/assets/og/615440015-1200px.jpg");
         await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', "Redbreasted Nuthatch", "Grayish Blue with Red Belly", "Nuthatches, Tree-clinging Birds", "Flitter, Undulating", "https://www.allaboutbirds.org/guide/assets/photo/308563981-480px.jpg");
     }
-    const firstRow = await db.getFirstAsync('SELECT * FROM birds WHERE id=2');
 }

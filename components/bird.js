@@ -10,6 +10,7 @@ export default function Bird({ birdData }) {
     <View>
       <Card style={styles.card}>
         <Card.Title style={styles.h2}>{birdData.name}</Card.Title>
+        <Card.Divider/>
         <Image
           style={styles.image}
           source={{
