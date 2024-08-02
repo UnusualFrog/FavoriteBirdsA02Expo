@@ -13,18 +13,18 @@ import BirdData from '../birdData/BirdData.json'
 import Bluejay from '../birdData/Bluejay.json';
 
 export default function HomeLayout() {
-  const [birdIndex, setBirdIndex] = useState(0);
+    const [birdIndex, setBirdIndex] = useState(0);
 
-  return (
-       <View>
+    return (
+        <View>
             <SQLiteProvider databaseName="birds.db" onInit={initializeDB}>
                 <Navbar />
-                <BirdContext.Provider value={{birdIndex, setBirdIndex}}>
+                <BirdContext.Provider value={{ birdIndex, setBirdIndex }}>
                     <Slot />
                 </BirdContext.Provider>
             </SQLiteProvider>
-       </View>
-   );
+        </View>
+    );
 }
 
 async function initializeDB(db) {
@@ -33,8 +33,8 @@ async function initializeDB(db) {
         DROP TABLE IF EXISTS THIS_IS_NOT_birds;
         CREATE TABLE IF NOT EXISTS birds (id INTEGER PRIMARY KEY, name TEXT NOT NULL, color TEXT NOT NULL, category TEXT NOT NULL, behavior TEXT NOT NULL, imageURI TEXT NOT NULL);
     `);
-     const result = await db.getAllAsync('SELECT * FROM birds');
-    if( result.length == 0 ) {
+    const result = await db.getAllAsync('SELECT * FROM birds');
+    if (result.length == 0) {
         await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', "Bluejay", "Blue", "Crows, Magpies, Jays Perching Birds", "Direct Flight, Flap/Glide, Hovering, Undulating", "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/311635911/900");
         await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', "Northern Flicker", "Brown with Speckles", "Picidae, Woodpeckers, Tree-clinging Birds", "Flap/Glide, Undulating", "https://www.allaboutbirds.org/guide/assets/og/615440015-1200px.jpg");
         await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', "Redbreasted Nuthatch", "Grayish Blue with Red Belly", "Nuthatches, Tree-clinging Birds", "Flitter, Undulating", "https://www.allaboutbirds.org/guide/assets/photo/308563981-480px.jpg");

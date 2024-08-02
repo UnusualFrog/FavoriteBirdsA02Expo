@@ -1,28 +1,28 @@
 // Pre-defined
 import { StyleSheet, Text, View, Image } from 'react-native';
-import {useState} from 'react';
+import { useState } from 'react';
 
 // Component Library
-import {Button, Card} from '@rneui/themed';
+import { Button, Card } from '@rneui/themed';
 
-export default function Bird({birdData}) {
-    return (
+export default function Bird({ birdData }) {
+  return (
     <View>
-        <Card style={styles.card}>
+      <Card style={styles.card}>
         <Card.Title style={styles.h2}>{birdData.name}</Card.Title>
-            <Image
-                    style={styles.image}
-                    source={{
-                      uri: birdData.imageURI
-                    }}
-                  />
+        <Image
+          style={styles.image}
+          source={{
+            uri: birdData.imageURI
+          }}
+        />
 
-            <Text style={styles.dataRow}><Text style={styles.bold}>Color:</Text> {birdData.color}</Text>
-            <Text style={styles.dataRow}><Text style={styles.bold}>Category:</Text> {birdData.category}</Text>
-            <Text style={styles.dataRow}><Text style={styles.bold}>Behavior:</Text> {birdData.behavior}</Text>
-        </Card>
+        <Text style={styles.dataRow}><Text style={styles.bold}>Color:</Text> {birdData.color}</Text>
+        <Text style={styles.dataRow}><Text style={styles.bold}>Category:</Text> {birdData.category}</Text>
+        <Text style={styles.dataRow}><Text style={styles.bold}>Behavior:</Text> {birdData.behavior}</Text>
+      </Card>
     </View>
-    );
+  );
 }
 
 const styles = StyleSheet.create({
@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   h2: {
-      fontSize: 35,
-      marginTop: 0.67,
-      marginBottom: 0.67,
-      marginLeft: 0,
-      marginRight: 0,
-      fontWeight: 'bold',
-    },
+    fontSize: 35,
+    marginTop: 0.67,
+    marginBottom: 0.67,
+    marginLeft: 0,
+    marginRight: 0,
+    fontWeight: 'bold',
+  },
   bold: {
     fontWeight: 'bold',
   },

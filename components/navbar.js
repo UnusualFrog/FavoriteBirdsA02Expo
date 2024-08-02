@@ -6,7 +6,7 @@ import { router } from 'expo-router';
 import notButton from './button';
 
 // Component Library
-import {Button} from '@rneui/themed';
+import { Button } from '@rneui/themed';
 
 export default function NavBar() {
     const handleHome = () => {
@@ -20,9 +20,9 @@ export default function NavBar() {
     }
     return (
         <View style={styles.container}>
-            <Button title={"Bird View"} onPress = {handleHome} buttonStyle={styles.button} titleStyle={styles.button_title}/>
-            <Button title={"Update Bird"} onPress = {handleUpdate} buttonStyle={styles.button} titleStyle={styles.button_title}/>
-            <Button title={"New Bird"} onPress = {handleNew} buttonStyle={styles.button} titleStyle={styles.button_title}/>
+            <Button title={"Bird View"} onPress={handleHome} buttonStyle={styles.button} titleStyle={styles.button_title} />
+            <Button title={"Update Bird"} onPress={handleUpdate} buttonStyle={styles.button} titleStyle={styles.button_title} />
+            <Button title={"New Bird"} onPress={handleNew} buttonStyle={styles.button} titleStyle={styles.button_title} />
         </View>
     );
 }
@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: 100,
         marginHorizontal: 20,
-      },
-  button_container: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  button_title: {
-    fontWeight: 'bold',
-    fontSize: 23,
-  },
+    },
+    button_container: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+    },
+    button_title: {
+        fontWeight: 'bold',
+        fontSize: 23,
+    },
 });

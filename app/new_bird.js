@@ -1,13 +1,13 @@
 // Pre-defined
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { useState} from 'react';
+import { useState } from 'react';
 import { useSQLiteContext } from 'expo-sqlite';
 
 // Components
 import notButton from '../components/button.js';
 
 // Component Library
-import {Button, Card, Input} from '@rneui/themed';
+import { Button, Card, Input } from '@rneui/themed';
 
 export default function NavBar() {
     const db = useSQLiteContext();
@@ -20,36 +20,36 @@ export default function NavBar() {
 
     const addRow = () => {
         async function add() {
-                const result = await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', birdName, birdColor, birdCategory, birdBehavior, birdImageUri);
-            }
-            add();
-      };
+            const result = await db.runAsync('INSERT INTO birds (name, color, category, behavior, imageURI) VALUES (?, ?, ?, ?, ?)', birdName, birdColor, birdCategory, birdBehavior, birdImageUri);
+        }
+        add();
+    };
 
     return (
         <View>
             <Card>
                 <Card.Title style={styles.h1}>Add A New Bird</Card.Title>
                 <Card.Divider />
-                <Input label="Name:" onChangeText={setBirdName} leftIcon={{ type: 'material-community', name: 'bird' }}/>
-                <Input label="Color:" onChangeText={setBirdColor} leftIcon={{ type: 'foundation', name: 'paint-bucket' }}/>
-                <Input label="Category:" onChangeText={setBirdCategory} leftIcon={{ type: 'material', name: 'category' }}/>
-                <Input label="Behavior:" onChangeText={setBirdBehavior} leftIcon={{ type: 'material-community', name: 'run' }}/>
-                <Input label="Image URI:" onChangeText={setBirdImageUri} leftIcon={{ type: 'antdesign', name: 'picture' }}/>
+                <Input label="Name:" onChangeText={setBirdName} leftIcon={{ type: 'material-community', name: 'bird' }} />
+                <Input label="Color:" onChangeText={setBirdColor} leftIcon={{ type: 'foundation', name: 'paint-bucket' }} />
+                <Input label="Category:" onChangeText={setBirdCategory} leftIcon={{ type: 'material', name: 'category' }} />
+                <Input label="Behavior:" onChangeText={setBirdBehavior} leftIcon={{ type: 'material-community', name: 'run' }} />
+                <Input label="Image URI:" onChangeText={setBirdImageUri} leftIcon={{ type: 'antdesign', name: 'picture' }} />
             </Card>
 
             <View style={styles.container}>
-                <Button title={"Add Bird"} onPress={() => {addRow()}}  buttonStyle={styles.button} titleStyle={styles.button_title}/>
+                <Button title={"Add Bird"} onPress={() => { addRow() }} buttonStyle={styles.button} titleStyle={styles.button_title} />
             </View>
 
         </View>
     );
 }
 
-const styles = StyleSheet.create( {
+const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         padding: 10,
-      },
+    },
     h1: {
         fontSize: 28,
         fontWeight: 'bold',
@@ -60,14 +60,14 @@ const styles = StyleSheet.create( {
         width: 300,
         marginHorizontal: 20,
         marginTop: 5,
-      },
-      button_container: {
+    },
+    button_container: {
         flexDirection: "row",
         justifyContent: "space-around",
         alignItems: "center",
-      },
-      button_title: {
+    },
+    button_title: {
         fontWeight: 'bold',
         fontSize: 23,
-      },
+    },
 });

@@ -3,15 +3,15 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 
 
 
-export default function RadioButton({buttonText, buttonPushed, onPress}) {
+export default function RadioButton({ buttonText, buttonPushed, onPress }) {
 
-    return (
-     <>
-        <Pressable style={buttonText == buttonPushed ? styles.buttonPushed : styles.button} onPress={onPress}>
-            <Text style={styles.text}>{buttonText}</Text>
-        </Pressable>
-     </>
-    );
+  return (
+    <>
+      <Pressable style={buttonText == buttonPushed ? styles.buttonPushed : styles.button} onPress={onPress}>
+        <Text style={styles.text}>{buttonText}</Text>
+      </Pressable>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
